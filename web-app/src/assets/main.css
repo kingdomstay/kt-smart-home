@@ -13,3 +13,8 @@ a {
 a:hover {
     opacity: .9;
 }
+
+.account-form {
+    margin: 16px 0;
+    padding: 0 18px;
+}

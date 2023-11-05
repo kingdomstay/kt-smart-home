@@ -59,8 +59,10 @@ html, body, #app {
 
 body, input, button {
     font-family: "Noto Sans", Arial, Helvetica, sans-serif;
+    color: #FFFFFF;
 }
 
 h1, h2, h3, h4, h5, h6 {
     font-family: "Mulish", Tahoma, Verdana, sans-serif;
+    color: #FFFFFF;
 }
