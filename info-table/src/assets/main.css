@@ -1,0 +1,17 @@
+@import './base.css';
+
+body {
+    background: var(--background-color);
+    min-height: 100%;
+    max-height: 100%;
+    overflow: hidden;
+    margin: 45px;
+}
+
+.card {
+    border-radius: 45px;
+    padding: 45px;
+    margin: 0 0 30px 0;
+    width: 100%;
+    background: var(--card-color);
+}
