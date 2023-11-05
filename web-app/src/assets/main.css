@@ -1,0 +1,15 @@
+@import "base.css";
+
+body {
+    background: #151515;
+}
+a {
+    color: var(--brand-text-color);
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: .1s;
+}
+a:hover {
+    opacity: .9;
+}
