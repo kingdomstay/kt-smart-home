@@ -3,6 +3,7 @@ import AppInput from "@/components/AppInput.vue";
 import AppButton from "@/components/AppButton.vue";
 
 import {useAuthStore} from "@/stores/auth.store";
+import router from "@/router";
 
 export default {
   components: {
@@ -37,6 +38,7 @@ export default {
             this.loading = false;
             this.formValid()
             const accessToken = useAuthStore()
+            router.push('/app/')
             console.log(accessToken)
           })
     }

@@ -1,7 +1,13 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
 import accountRoutes from "@/router/account.routes";
+import dashboardRoutes from "@/router/dashboard.routes";
+import taskRoutes from "@/router/task.routes";
 import {useAuthStore} from "@/stores/auth.store";
+import Layout from "@/views/app/Layout.vue";
+import Home from "@/views/app/dashboard/Home.vue";
+import TasksLayout from "@/views/app/tasks/TasksLayout.vue";
+import AllTasks from "@/views/app/tasks/AllTasks.vue";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -9,9 +15,18 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView
+      redirect: {name: 'appDashboard'}
     },
     { ...accountRoutes },
+    {
+      path: '/app',
+      component: Layout,
+      redirect: {name: 'appDashboard'},
+      children: [
+        { ...dashboardRoutes },
+        { ...taskRoutes }
+      ]
+    },
 
     // При другом случае редирект на главную страницу
     { path: '/:pathMatch(.*)*', redirect: '/' }
