@@ -1,7 +1,7 @@
 <template>
   <li class="sidebar__item">
     <router-link class="sidebar__item-link" :to="itemUrl" active-class="sidebar__item-link_active">
-      <p><span class="sidebar__item-icon">{{itemIcon}}</span>{{itemName}}</p>
+      <p><span class="sidebar__item-icon" v-html="itemIcon"></span>{{itemName}}</p>
     </router-link>
   </li>
 </template>

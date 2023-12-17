@@ -1,9 +1,9 @@
 <template>
-  <h1>Важное</h1>
+  <h1><span class="title-icon">&#11088;</span>Важное</h1>
   <div class="items-group" v-if="loaded && tasks">
     <TaskItem v-for="task in tasks" :task-title="task.title" :task-id="task.id" :key="task.id" />
   </div>
-  <div v-if="loaded && !tasks">
+  <div v-if="loaded && tasks.length === 0">
     <p>Не найдено добавленных задач</p>
   </div>
 </template>
@@ -46,5 +46,8 @@ h1 {
   flex-direction: column;
   align-items: flex-start;
   gap: 4px;
+}
+.title-icon {
+  padding-right: 8px;
 }
 </style>

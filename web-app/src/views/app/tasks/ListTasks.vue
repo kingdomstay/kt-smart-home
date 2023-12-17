@@ -1,5 +1,5 @@
 <template>
-  <h1><span class="title-icon">&#128197;</span>Все</h1>
+  <h1 v-if="loaded && list"><span class="title-icon" v-html="list.icon"></span>{{list.name}}</h1>
   <div class="items-group" v-if="loaded && tasks">
     <TaskItem v-for="task in tasks" :task-title="task.title" :task-id="task.id" :key="task.id" />
   </div>
@@ -11,19 +11,43 @@
 <script>
 import TaskItem from "@/components/task/TaskItem.vue";
 import {useTasksStore} from "@/stores/tasks.store";
+import {useRoute} from "vue-router";
 export default {
   components: {TaskItem},
   data() {
     return {
       tasks: [],
+      list: null,
       loaded: false
     }
   },
   async mounted() {
+    const route = useRoute()
+    const id = route.params.id
+
     const tasksStore = useTasksStore();
     await tasksStore.loadTasks()
-    this.tasks = tasksStore.tasks
+    await tasksStore.loadLists()
+    this.tasks = tasksStore.getTasksByListId(id)
+    const list = tasksStore.getListById(id)
+    this.list = {
+      icon: list.icon,
+      name: list.name
+    }
     this.loaded = true
+  },
+  async beforeRouteUpdate(to, from, next) {
+    const id = to.params.id
+    const tasksStore = useTasksStore();
+    tasksStore.selectTask(null)
+    this.tasks = tasksStore.getTasksByListId(id)
+    const list = tasksStore.getListById(id)
+    this.list = {
+      icon: list.icon,
+      name: list.name
+    }
+    this.loaded = true
+    next();
   },
   unmounted() {
     const tasksStore = useTasksStore();

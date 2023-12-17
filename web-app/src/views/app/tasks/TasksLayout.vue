@@ -3,13 +3,14 @@
     <aside>
       <AppBar>
         <AppBarGroupItems>
-          <AppBarItem item-icon="&#127919;" item-name="Текущее" item-url="/app/tasks/current" />
+          <!--<AppBarItem item-icon="&#127919;" item-name="Текущее" item-url="/app/tasks/current" />-->
           <AppBarItem item-icon="&#11088;" item-name="Важное" item-url="/app/tasks/favorites" />
           <AppBarItem item-icon="&#128197;" item-name="Все" item-url="/app/tasks/all" />
         </AppBarGroupItems>
         <AppBarGroupItems group-name="Списки">
-          <AppBarItem item-icon="&#127968;" item-name="Дом" item-url="/app/tasks/categories/home" />
-          <AppBarItem item-icon="&#127891;" item-name="Учеба" item-url="/app/tasks/categories/study" />
+          <AppBarItem v-for="list in lists" :key="list.id" :item-icon="list.icon" :item-name="list.name" :item-url="`/app/tasks/lists/${list.id}`" />
+        </AppBarGroupItems>
+        <AppBarGroupItems group-name="Категории">
         </AppBarGroupItems>
       </AppBar>
     </aside>
@@ -28,8 +29,19 @@ import AppBarGroupItems from "@/components/base/AppBarGroupItems.vue";
 import AppBarItem from "@/components/base/AppBarItem.vue";
 import TaskDetailView from "@/components/task/TaskDetailView.vue";
 import CreateTask from "@/components/task/CreateTask.vue";
+import {useTasksStore} from "@/stores/tasks.store";
 export default {
   components: {CreateTask, TaskDetailView, AppBarItem, AppBarGroupItems, AppBar},
+  data() {
+    return {
+      lists: []
+    }
+  },
+  async mounted() {
+    const tasksStore = useTasksStore()
+    await tasksStore.loadLists()
+    this.lists = tasksStore.lists
+  }
 }
 </script>
 

@@ -50,7 +50,7 @@ export default {
 
 <style scoped lang="scss">
 .create-task {
-  background: linear-gradient(180deg, rgba(21, 21, 21, 0) 0%, rgba(21, 21, 21, 0.95) 40%);
+  background: linear-gradient(180deg, rgba(21, 21, 21, 0) 0%, rgba(21, 21, 21, 0.95) 34%);
   padding-top: 48px;
   padding-bottom: 64px;
   position: sticky;
