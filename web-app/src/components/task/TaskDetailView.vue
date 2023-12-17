@@ -27,14 +27,15 @@ export default {
       selectedItem: null,
       keyHandler: (e) => {
         const tasksStore = useTasksStore();
-        if (tasksStore.getSelectedTask()) {
+        const currentTask = tasksStore.getSelectedTask()
+        if (currentTask) {
           switch (e.keyCode) {
             // Снять фокус с задачи
             case 27:
               return tasksStore.selectTask(null)
             // Удалить задачу
             case 46:
-              
+              return tasksStore.removeTask(currentTask.id)
           }
         }
       }

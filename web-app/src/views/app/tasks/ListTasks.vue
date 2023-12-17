@@ -12,6 +12,7 @@
 import TaskItem from "@/components/task/TaskItem.vue";
 import {useTasksStore} from "@/stores/tasks.store";
 import {useRoute} from "vue-router";
+import {computed} from "vue";
 export default {
   components: {TaskItem},
   data() {
@@ -28,7 +29,7 @@ export default {
     const tasksStore = useTasksStore();
     await tasksStore.loadTasks()
     await tasksStore.loadLists()
-    this.tasks = tasksStore.getTasksByListId(id)
+    this.tasks = computed(() => tasksStore.getTasksByListId(id))
     const list = tasksStore.getListById(id)
     this.list = {
       icon: list.icon,
@@ -40,7 +41,7 @@ export default {
     const id = to.params.id
     const tasksStore = useTasksStore();
     tasksStore.selectTask(null)
-    this.tasks = tasksStore.getTasksByListId(id)
+    this.tasks = computed(() => tasksStore.getTasksByListId(id))
     const list = tasksStore.getListById(id)
     this.list = {
       icon: list.icon,

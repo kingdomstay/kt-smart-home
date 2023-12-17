@@ -8,20 +8,35 @@ export const useTasksStore = defineStore('tasks', {
         selectedTask: null
     }),
     actions: {
-        async loadTasks() {
-            if (!this.tasks) {
+        async loadTasks(force = false) {
+            if (!this.tasks || force) {
                 const tasks = await task.getAllTasks()
                 this.tasks = tasks.data
             }
         },
-        async loadLists() {
-            if (!this.lists) {
+        async loadLists(force = false) {
+            if (!this.lists || force) {
                 const lists = await task.getAllLists()
                 this.lists = lists.data
             }
         },
         selectTask(id) {
             this.selectedTask = id
+        },
+        async createTask(title) {
+            await task.createTask(title)
+            await this.loadTasks(true)
+        },
+        async editTask(id, name, value) {
+
+        },
+        async completeTask(id) {
+            await this.editTask(id, 'is_complete', true)
+        },
+        async removeTask(id) {
+            await task.removeTaskById(id)
+            this.selectTask(null)
+            await this.loadTasks(true)
         }
     },
     getters: {

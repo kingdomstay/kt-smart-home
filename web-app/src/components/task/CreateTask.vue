@@ -16,7 +16,16 @@ export default {
     return {
       selected: false,
       notCompleted: false,
-      taskName: null
+      taskName: null,
+      keyHandler: (e) => {
+        if (this.selected && !this.notCompleted && this.taskName) {
+          switch (e.keyCode) {
+              // Создать задачу
+            case 13:
+              return this.completeCreateTask()
+          }
+        }
+      }
     }
   },
   methods: {
@@ -37,6 +46,15 @@ export default {
         }
       }
     },
+    async completeCreateTask() {
+      if (this.taskName.trim() !== "") {
+        const tasksStore = useTasksStore();
+        await tasksStore.createTask(this.taskName.trim());
+        this.notCompleted = false;
+        this.taskName = null;
+        this.selected = false;
+      }
+    }
   },
   computed: {
     randomTemplateTask() {
@@ -44,6 +62,12 @@ export default {
       const randomIndex = Math.floor(Math.random() * templates.length);
       return `Например, ${templates[randomIndex]}`
     }
+  },
+  mounted() {
+    window.addEventListener("keydown", this.keyHandler);
+  },
+  unmounted() {
+    window.removeEventListener("keydown", this.keyHandler);
   }
 }
 </script>

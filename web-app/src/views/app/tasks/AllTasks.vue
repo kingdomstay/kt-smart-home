@@ -11,6 +11,7 @@
 <script>
 import TaskItem from "@/components/task/TaskItem.vue";
 import {useTasksStore} from "@/stores/tasks.store";
+import {computed} from "vue";
 export default {
   components: {TaskItem},
   data() {
@@ -22,7 +23,7 @@ export default {
   async mounted() {
     const tasksStore = useTasksStore();
     await tasksStore.loadTasks()
-    this.tasks = tasksStore.tasks
+    this.tasks = computed(() => tasksStore.tasks)
     this.loaded = true
   },
   unmounted() {
