@@ -11,6 +11,11 @@ export async function createTask(title) {
 export async function removeTaskById(id) {
     return await api.delete(`/tasks/${id}/`);
 }
+export async function editTaskById(id, data) {
+    return await api.patch(`/tasks/${id}/`, data)
+}
+
+
 export async function getAllLists() {
     return await api.get(`/lists/`);
 }

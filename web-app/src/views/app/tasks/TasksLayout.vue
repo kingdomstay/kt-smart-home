@@ -47,6 +47,10 @@ export default {
 
 <style scoped lang="scss">
 .task-layout {
+  ::selection {
+    background: rgba(193, 148, 23, 1);
+    color: #0D0D0D;
+  }
   flex: 1;
   height: calc(100% - 56px);
   display: flex;

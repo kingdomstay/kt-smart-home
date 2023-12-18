@@ -27,8 +27,9 @@ export const useTasksStore = defineStore('tasks', {
             await task.createTask(title)
             await this.loadTasks(true)
         },
-        async editTask(id, name, value) {
-
+        async editTask(id, data) {
+            await task.editTaskById(id, data)
+            await this.loadTasks(true)
         },
         async completeTask(id) {
             await this.editTask(id, 'is_complete', true)

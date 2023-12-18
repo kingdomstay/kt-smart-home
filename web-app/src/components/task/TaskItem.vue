@@ -45,6 +45,7 @@ export default {
 .task-item {
   width: 100%;
   max-width: 75vw;
+  min-height: 46px;
   display: flex;
   padding: 12px 14px;
   align-items: center;
@@ -60,7 +61,7 @@ export default {
   }
   &__title {
     color: #FFF;
-    font-family: Noto Sans;
+    font-family: Noto Sans, sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;
